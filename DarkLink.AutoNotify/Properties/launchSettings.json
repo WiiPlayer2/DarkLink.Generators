@@ -3,7 +3,7 @@
     "Debug Roslyn Component": {
       "commandName": "Executable",
       "executablePath": "dotnet-kittitas",
-      "commandLineArgs": "./DarkLink.AutoNotify/DarkLink.AutoNotify.csproj",
+      "commandLineArgs": "./DemoApp/DemoApp.csproj",
       "workingDirectory": ".."
     }
   }
