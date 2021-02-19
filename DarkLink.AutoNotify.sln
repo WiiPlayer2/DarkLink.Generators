@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarkLink.AutoNotify", "DarkLink.AutoNotify\DarkLink.AutoNotify.csproj", "{99FDD5C7-FBBA-48CF-8636-35AD3597128E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp", "DemoApp\DemoApp.csproj", "{27E14B90-CA4E-440B-AC4A-2441E3CA4071}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99FDD5C7-FBBA-48CF-8636-35AD3597128E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99FDD5C7-FBBA-48CF-8636-35AD3597128E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99FDD5C7-FBBA-48CF-8636-35AD3597128E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99FDD5C7-FBBA-48CF-8636-35AD3597128E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E14B90-CA4E-440B-AC4A-2441E3CA4071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E14B90-CA4E-440B-AC4A-2441E3CA4071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E14B90-CA4E-440B-AC4A-2441E3CA4071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E14B90-CA4E-440B-AC4A-2441E3CA4071}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A418A804-EB88-46A7-8EFE-B880D4FFF44E}
+	EndGlobalSection
+EndGlobal
