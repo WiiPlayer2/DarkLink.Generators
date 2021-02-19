@@ -1,12 +1,22 @@
 ﻿using System;
 
+using DarkLink.AutoNotify;
+
 namespace DemoApp
 {
-    class Program
+    internal partial class AutoNotifyClass
     {
-        static void Main(string[] args)
+        [AutoNotify]
+        private float value;
+    }
+
+    internal class Program
+    {
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            //new AutoNotifyClass().Value;
         }
     }
 }
