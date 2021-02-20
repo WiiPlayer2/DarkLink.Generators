@@ -8,5 +8,7 @@ namespace DarkLink.AutoNotify
         public AutoNotifyAttribute()
         {
         }
+
+        public bool UsePrivateSetter { get; set; }
     }
 }

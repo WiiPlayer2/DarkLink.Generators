@@ -6,7 +6,7 @@ namespace DemoApp
 {
     internal partial class AutoNotifyClass
     {
-        [AutoNotify]
+        [AutoNotify(UsePrivateSetter = true)]
         private float value;
     }
 

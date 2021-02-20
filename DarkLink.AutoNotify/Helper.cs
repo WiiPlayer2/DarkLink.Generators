@@ -25,11 +25,14 @@ namespace DarkLink.AutoNotify
                 apply(item);
         }
 
-        public static T GetSymbol<T>(this SemanticModel semanticModel, SyntaxNode syntaxNode, CancellationToken cancellationToken = default)
-                    where T : class, ISymbol
+        public static ISymbol GetSymbol(this SemanticModel semanticModel, SyntaxNode syntaxNode, CancellationToken cancellationToken = default)
         {
             var symbolInfo = semanticModel.GetSymbolInfo(syntaxNode, cancellationToken);
-            return (symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault()) as T;
+            return symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
         }
+
+        public static T GetSymbol<T>(this SemanticModel semanticModel, SyntaxNode syntaxNode, CancellationToken cancellationToken = default)
+            where T : class, ISymbol
+            => semanticModel.GetSymbol(syntaxNode, cancellationToken) as T;
     }
 }

@@ -25,7 +25,9 @@ namespace DarkLink.AutoNotify
                 var compilation = AddAttributeCompilation(attributeSource, context.Compilation);
                 var attributeSymbol = compilation.GetTypeByMetadataName("DarkLink.AutoNotify.AutoNotifyAttribute");
 
+#pragma warning disable RS1024 // Compare symbols correctly
                 var classInfoDictionary = new Dictionary<INamedTypeSymbol, ClassInfo>(SymbolEqualityComparer.Default);
+#pragma warning restore RS1024 // Compare symbols correctly
                 foreach (var attributeNode in attributeNodeCandidates)
                 {
                     var semanticModel = compilation.GetSemanticModel(attributeNode.SyntaxTree);
@@ -61,7 +63,7 @@ namespace DarkLink.AutoNotify
                         continue;
                     }
 
-                    var classSymbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax, context.CancellationToken) as INamedTypeSymbol;
+                    var classSymbol = semanticModel.GetDeclaredSymbol(classDeclarationSyntax, context.CancellationToken);
 
                     if (!classInfoDictionary.TryGetValue(classSymbol, out var classInfo))
                     {
@@ -70,7 +72,7 @@ namespace DarkLink.AutoNotify
                     }
 
                     fieldDeclarationSyntax.Declaration.Variables
-                        .Select(variable => semanticModel.GetDeclaredSymbol(variable) as IFieldSymbol)
+                        .Select(variable => FieldInfo.FromFieldSymbol(semanticModel.GetDeclaredSymbol(variable) as IFieldSymbol, attributeSymbol))
                         .Foreach(classInfo.FieldSymbols.Add);
                 }
 
@@ -84,16 +86,17 @@ namespace DarkLink.AutoNotify
                     sb.AppendLine($"    partial class {classInfo.TypeSymbol.Name} : INotifyPropertyChanged {{");
                     sb.AppendLine("        public event PropertyChangedEventHandler PropertyChanged;");
 
-                    foreach (var fieldSymbol in classInfo.FieldSymbols)
+                    foreach (var fieldInfo in classInfo.FieldSymbols)
                     {
-                        var propName = fieldSymbol.Name.Capitalize();
-                        sb.AppendLine($"        public {fieldSymbol.Type} {propName} {{");
+                        var fieldSymbol = fieldInfo.FieldSymbol;
+
+                        sb.AppendLine($"        public {fieldSymbol.Type} {fieldInfo.PropertyName} {{");
                         sb.AppendLine($"            get => this.{fieldSymbol.Name};");
-                        sb.AppendLine("            set {");
+                        sb.AppendLine($"            {(fieldInfo.UsePrivateSetter ? "private " : string.Empty)}set {{");
                         sb.AppendLine($"                if(this.{fieldSymbol.Name} == value)");
                         sb.AppendLine("                    return;");
                         sb.AppendLine($"                this.{fieldSymbol.Name} = value;");
-                        sb.AppendLine($"                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(\"{propName}\"));");
+                        sb.AppendLine($"                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(\"{fieldInfo.PropertyName}\"));");
                         sb.AppendLine("            }");
                         sb.AppendLine("        }");
                     }
@@ -140,8 +143,40 @@ namespace DarkLink.AutoNotify
             TypeSymbol = typeSymbol;
         }
 
-        public IList<IFieldSymbol> FieldSymbols { get; } = new List<IFieldSymbol>();
+        public List<FieldInfo> FieldSymbols { get; } = new();
 
         public INamedTypeSymbol TypeSymbol { get; }
+    }
+
+    internal class FieldInfo
+    {
+        public FieldInfo(IFieldSymbol fieldSymbol, bool usePrivateSetter)
+        {
+            FieldSymbol = fieldSymbol;
+            UsePrivateSetter = usePrivateSetter;
+        }
+
+        public IFieldSymbol FieldSymbol { get; }
+
+        public string PropertyName => FieldSymbol.Name.Capitalize();
+
+        public bool UsePrivateSetter { get; }
+
+        public static FieldInfo FromFieldSymbol(IFieldSymbol fieldSymbol, INamedTypeSymbol attributeTypeSymbol)
+        {
+            var attributeData = fieldSymbol.GetAttributes().First(o => SymbolEqualityComparer.Default.Equals(o.AttributeClass, attributeTypeSymbol));
+            var namedArgs = attributeData.NamedArguments.ToDictionary(o => o.Key, o => o.Value);
+
+            var usePrivateSetter = GetNamedArg("UsePrivateSetter", false);
+
+            return new FieldInfo(fieldSymbol, usePrivateSetter);
+
+            T GetNamedArg<T>(string argName, T defaultValue)
+            {
+                if (namedArgs.TryGetValue(argName, out var typedConstant))
+                    return (T)typedConstant.Value;
+                return defaultValue;
+            }
+        }
     }
 }
