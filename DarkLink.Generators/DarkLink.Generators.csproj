@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\DarkLink.AutoNotify\DarkLink.AutoNotify.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(OutputPath)/*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Update="tools/*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="" />
+  </ItemGroup>
+</Project>
