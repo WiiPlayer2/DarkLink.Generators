@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 $ErrorActionPreference = 'Stop'
 
-$now = [DateTime]::Now
+$now = [DateTime]::UtcNow
 $versionSuffix = "-pre$($now.ToString("yyyyMMddHHmmss"))"
 
 New-Item ./output -ItemType Directory -Force | Out-Null
