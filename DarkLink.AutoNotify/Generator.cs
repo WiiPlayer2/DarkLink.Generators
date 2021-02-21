@@ -93,7 +93,7 @@ namespace DarkLink.AutoNotify
                         sb.AppendLine($"        public {fieldSymbol.Type} {fieldInfo.PropertyName} {{");
                         sb.AppendLine($"            get => this.{fieldSymbol.Name};");
                         sb.AppendLine($"            {(fieldInfo.UsePrivateSetter ? "private " : string.Empty)}set {{");
-                        sb.AppendLine($"                if(this.{fieldSymbol.Name} == value)");
+                        sb.AppendLine($"                if(object.Equals(this.{fieldSymbol.Name}, value))");
                         sb.AppendLine("                    return;");
                         sb.AppendLine($"                this.{fieldSymbol.Name} = value;");
                         sb.AppendLine($"                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(\"{fieldInfo.PropertyName}\"));");
