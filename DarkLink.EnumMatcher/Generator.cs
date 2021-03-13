@@ -84,8 +84,29 @@ namespace DarkLink.EnumMatcher
             sb.AppendLine($"            }}");
             sb.AppendLine($"        }}");
 
+            // Generate Func
+            sb.AppendLine($"        public static T Match<T>(");
+            sb.Append($"            this {enumInfo.EnumTypeSymbol} thisEnum");
+            foreach (var field in enumInfo.Fields)
+            {
+                sb.AppendLine($",");
+                sb.Append($"            Func<T> on{field.Name}");
+            }
+            sb.AppendLine($") {{");
+            sb.AppendLine($"            switch(thisEnum) {{");
+            foreach (var field in enumInfo.Fields)
+            {
+                sb.AppendLine($"                case {field}:");
+                sb.AppendLine($"                    return on{field.Name}();");
+            }
+            sb.AppendLine($"                default:");
+            sb.AppendLine($"                    throw new NotSupportedException();");
+            sb.AppendLine($"            }}");
+            sb.AppendLine($"        }}");
+
             sb.AppendLine($"    }}");
             sb.AppendLine($"}}");
+
             var sourceText = SourceText.From(sb.ToString(), Encoding.UTF8);
             context.AddSource($"{enumInfo.EnumTypeSymbol}.cs", sourceText);
         }
