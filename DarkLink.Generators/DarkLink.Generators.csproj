@@ -8,7 +8,7 @@
     <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
-    <Version>0.0.1$(VersionSuffix)</Version>
+    <VersionPrefix>0.0.1</VersionPrefix>
   </PropertyGroup>
   
   <ItemGroup>
