@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 using DarkLink.AutoNotify;
 
 namespace DemoApp
@@ -47,7 +47,7 @@ namespace DemoApp
                 () => "field2",
                 () => "field3",
                 () => "field4");
-            var flagsFields = normalEnum.Match(
+            var flagsFields = flagsEnum.Match(
                 () => "field1",
                 () => "field2",
                 () => "field3",
