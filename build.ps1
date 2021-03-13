@@ -2,7 +2,7 @@
 $ErrorActionPreference = 'Stop'
 
 $now = [DateTime]::UtcNow
-$versionSuffix = "pre$($now.ToString("yyyyMMddHHmmss"))"
+$versionSuffix = "-pre$($now.ToString("yyyyMMddHHmmss"))"
 
 New-Item ./output -ItemType Directory -Force | Out-Null
 Remove-Item ./output/* -Recurse -Force | Out-Null
