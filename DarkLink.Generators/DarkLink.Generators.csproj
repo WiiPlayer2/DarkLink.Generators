@@ -12,8 +12,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\DarkLink.AutoNotify\DarkLink.AutoNotify.csproj" />
-    <ProjectReference Include="..\DarkLink.EnumMatcher\DarkLink.EnumMatcher.csproj" />
+    <ProjectReference Include="..\DarkLink.AutoNotify\DarkLink.AutoNotify.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\DarkLink.EnumMatcher\DarkLink.EnumMatcher.csproj" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
