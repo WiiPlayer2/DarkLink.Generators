@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace DarkLink.AutoNotify
+namespace DarkLink.Generators.Shared
 {
     [DebuggerStepThrough]
     internal static class Helper
@@ -35,4 +35,9 @@ namespace DarkLink.AutoNotify
             where T : class, ISymbol
             => semanticModel.GetSymbol(syntaxNode, cancellationToken) as T;
     }
+}
+
+namespace System.Runtime.CompilerServices
+{
+    internal class IsExternalInit { }
 }

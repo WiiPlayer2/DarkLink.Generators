@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp", "DemoApp\DemoApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DarkLink.Generators", "DarkLink.Generators\DarkLink.Generators.csproj", "{F045FAFC-047B-484C-AAA2-47BFE6243959}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarkLink.EnumMatcher", "DarkLink.EnumMatcher\DarkLink.EnumMatcher.csproj", "{26B83FDC-79C5-491C-8BE4-B4874AF83CBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F045FAFC-047B-484C-AAA2-47BFE6243959}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F045FAFC-047B-484C-AAA2-47BFE6243959}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F045FAFC-047B-484C-AAA2-47BFE6243959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26B83FDC-79C5-491C-8BE4-B4874AF83CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B83FDC-79C5-491C-8BE4-B4874AF83CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B83FDC-79C5-491C-8BE4-B4874AF83CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B83FDC-79C5-491C-8BE4-B4874AF83CBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
