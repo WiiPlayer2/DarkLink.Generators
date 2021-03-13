@@ -44,7 +44,9 @@ namespace DarkLink.EnumMatcher
 
         private IEnumerable<INamedTypeSymbol> CollectEnumTypes(Compilation compilation)
         {
+#pragma warning disable RS1024 // Compare symbols correctly
             var enumTypeSymbols = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+#pragma warning restore RS1024 // Compare symbols correctly
 
             foreach (var matchAccessNode in matchAccessNodes)
             {
